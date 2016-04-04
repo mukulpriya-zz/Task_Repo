@@ -3,6 +3,7 @@ from blog.models import *
 from django.core.paginator import Paginator
 from django.template import RequestContext
 from blog.forms import *
+from django.http import HttpResponseRedirect, HttpResponse
 import re
 
 def index(request):
@@ -61,9 +62,7 @@ def post_a_blog(request):
         else:
             message = 'fail'
 
-        return render_to_response('create_blog.html',
-              {'message': message},
-              context_instance=RequestContext(request))
+        return HttpResponseRedirect('/')
     else:
         return render_to_response('create_blog.html',
                 {'form': BlogPostForm()},
@@ -82,9 +81,7 @@ def post_a_comment(request,**kwargs):
         comm.body = request.POST['body']
         comm.save()
 
-        return render_to_response('index.html',
-              {},
-              context_instance=RequestContext(request))
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
               
 
 def show_comments(request,**kwargs):

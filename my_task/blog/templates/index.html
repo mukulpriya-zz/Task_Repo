@@ -1,6 +1,7 @@
 {% if posts %}
     {% for post in posts.object_list %}
         <a href="{% url 'article' id=post.id %}">{{ post.title }}</a>
+	<br>
         {{ post.body|truncatewords:80 }}
         <br><br><br>
     {% endfor %}
