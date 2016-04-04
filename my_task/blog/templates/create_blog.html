@@ -1,0 +1,12 @@
+{% block content %}
+<h1>Create a Blog Here</h1>
+{% if message %}
+{{ message }}
+{% endif %}
+<div>
+    <form action="post_a_blog" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit the blog" />
+    </form>     
+</div>
+{% endblock %}

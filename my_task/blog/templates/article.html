@@ -1,0 +1,28 @@
+{% block content %}
+{% block title %}
+
+   <h1> {{ title }} </h1>
+{% endblock %}
+
+
+{% if para %}
+   {% for post in para %}
+        {{ post.body|linebreaks }}
+    <br> <br>
+
+    {% if post.has_comment == True %}
+    <a href="{% url 'show_comment' id=post.id %}">Show Comments</a>
+    {% endif %}
+
+     <div>
+    <form action="{% url 'post_comment' id=post.id %}" method="post">{% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" value="Submit comment" />
+    </form>     
+    </div>
+<br><br>
+    {% endfor %}
+    
+{% endif %}
+
+{% endblock %}

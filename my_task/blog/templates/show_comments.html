@@ -1,0 +1,10 @@
+{% block content %}
+
+{% if comments %}
+   {% for post in comments %}
+        {{ post.body }}
+    <br>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
